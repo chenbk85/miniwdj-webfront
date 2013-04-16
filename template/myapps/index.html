@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+	<head>
+		<link href="./myApps.css" rel="stylesheet">
+		<style>
+
+			.overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:998;width:100%;height:100%;_padding:0 20px 0 0;background:#f6f4f5;display:none;}
+			.showbox{position:fixed;top:0;left:50%;z-index:9999;opacity:0;filter:alpha(opacity=0);margin-left:-80px;}
+			*html,*html body{background-image:url(about:blank);background-attachment:fixed;}
+			*html .showbox,*html .overlay{position:absolute;top:expression(eval(document.documentElement.scrollTop));}
+			div.loadingWord{width:250px;height:50px;line-height:40px;border:1px solid #ccc;background:#fff;}
+			.loadingWord img {padding: 10px;  width: 30px; height: 30px;}
+			.loadingWord span {
+				font-size: 14px;
+				height: 100%;
+				width: 100%;
+				text-align: center;
+				padding-left: 10px;
+				position: absolute;
+				top: 18px;
+				left: 5px;
+			}
+		</style>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<div class="container">
+		<ul class="sideBar">
+			<li class="current" id="showallapps"><a>全部应用</a></li>
+			<li><a href="javascript:void(0)" hideFocus="true" id="showupdateapps">可升级<span class="patch">0</span></a></li>
+		</ul>
+			<div class="main-container">
+				<div class="overlay">&nbsp;</div>
+					<div class="showbox" id="AjaxLoading">
+					<div class="loadingWord"><img src="./images/301.gif" alt="" /> <span>正在移除应用, 请稍等...</span></div>
+				</div>
+
+				<div class="loading">
+				 	<div class="warning">
+					<p>正在扫描手机里的应用，请稍等...</p>
+					</div>
+				</div>
+				<div id="app-container">
+					<h1 class="title" id="allapptitle">您的 <span style="font-size:1em;padding:0 5px 0 5px" id="machine"> </span>已装了<span style="font-size:1em;padding:0 5px 0 5px" id="app-count"></span>个应用：</h1>
+					<div class="title" id="updatetitle">有 <span style="font-size:1em;padding:0 5px 0 5px" id="update-count">0</span> 个应用可以升级到最新版 <div id="updateallbtn" class="update-all">一键升级</div></div>
+					
+					<div class="clear-fix"></div>
+					<div class="carousel" >
+						<ul class="app-list" id="apps">
+
+						</ul>
+						<ul class="app-list" id="update_apps">
+
+						</ul>
+						<div class="clear-fix"></div>			
+					</div>
+				</div>
+	    	</div>
+	    </div>
+	<script type="text/javascript" src="../js/jquery-1.8.0.js"></script>
+		<script type="text/javascript">
+	    	$(document).ready(function(){
+	    		 var is_deleting = false;
+	    		 window.location.href = "#miniwdj://myapps/onload";
+	    		 $(".show-unstall").live("click", function(){
+	    		 	if(is_deleting){
+	    		 		is_deleting = false;
+	    		 		return true;
+	    		 	}
+	    		 	return false;
+	    		 })
+	    		 $(".sideBar a").click(function(){
+					$(".current").removeClass("current");
+					$(this).parent().addClass("current");
+				})
+	    		 $(".unstall").live("click", function(){
+	    		 	 is_deleting = true;
+	    		 	 return true;
+	    		 })
+	    		 $("#update_apps").hide();
+	    		 $("#updatetitle").hide();
+	    		 $("#updateallbtn").click(function (){
+					 $.each(update_apps, function(key, item) { 
+	    		 	 	window.location.href = item.update_url;
+	    		 	 })
+	    		 });
+	    		 $("#showallapps").click(function(){
+	    		 	$("#updatetitle").hide();
+	    		 	$("#update_apps").hide();
+	    		 	$("#allapptitle").show();
+	    		 	$("#apps").show();
+	    		 });
+
+	    		 $("#showupdateapps").click(function(){
+	    		 	$("#allapptitle").hide();
+	    		 	$("#updatetitle").show();
+	    		 	$("#update_apps").show();
+	    		 	$("#apps").hide();
+	    		 	$('#update_apps').html("");
+
+	    		 	$.each(update_apps, function(key, item) { 
+	    		 		var tmpl = document.getElementById('J_tmp_update').innerHTML;
+                		var doTtmpl = doT.template(tmpl);
+	    		 		var item_html = '<li id="update_'+ hex_md5(item.id) +'" class="app" hidefocus="true">' + doTtmpl(item) + '</li>';
+		    			
+		    			$('#update_apps').append(item_html);
+	    		 	})
+	    		 });
+	    		 $("#app-container").hide();
+	    	})
+			var apps = {};
+			var update_apps = {};
+			function ShowTip() {
+	    		$(".overlay").css({'display':'block','opacity':'0.8'});
+				$(".showbox").stop(true).animate({'margin-top':'245px','opacity':'1'},200);
+			}
+			function HideTip() {
+				$(".showbox").stop(true).animate({'margin-top':'245px','opacity':'0'},400);
+				$(".overlay").css({'display':'none','opacity':'0'});
+			}
+		    function setName(machine) {
+		    	$('#machine-name').html(machine);
+		    }
+		    function setAppCount(appcount) {
+		    	$('#app-count').html(appcount);
+		    }
+		    function addItem(item) {
+		    	var tmpl = document.getElementById('J_tmpl').innerHTML;
+                var doTtmpl = doT.template(tmpl);
+                
+                var item_html = '<li id="'+ hex_md5(item.id) +'" class="app" hidefocus="true">' + doTtmpl(item) + '</li>';
+		    	$('#apps').append(item_html);
+		    	apps[hex_md5(item.id)] = item;
+		    }
+		    function removeUpdateItem(item) {
+		    	var cnt = 0;
+		    	if (eval($('.patch').html()) - 1 >= 0)
+		    		cnt = eval($('.patch').html()) - 1;
+		    	$('.patch').html(cnt);
+		    	if (eval($('#update-count').html()) - 1 >= 0)
+		    		cnt = eval($('#update-count').html()) - 1;
+		    	$('#update-count').html(cnt)
+		    	$('#update_' + hex_md5(item.id)).remove();
+		    	delete update_apps[hex_md5(item.id)];
+		    }
+		    function removeItem(item) {
+		    	setAppCount(eval($('#app-count').html()) - 1 < 0 ? 0: eval($('#app-count').html()) - 1);
+		    	$('#' + hex_md5(item.id)).remove();
+		    	$('#update_' + hex_md5(item.id)).remove();
+		    }
+		    function updateItem(item) {
+		    	var tmpl = document.getElementById('J_tmpl').innerHTML;
+                var doTtmpl = doT.template(tmpl);
+                var item_html = doTtmpl(item);
+		    	$('#' + hex_md5(item.id)).html(item_html);
+		    	$('#' + hex_md5(item.id) + ' .icon').css("background", "");
+		    	if (item.need_update) {
+		    		$('.patch').html(eval($('.patch').html()) + 1)
+		    		$('#update-count').html(eval($('#update-count').html()) + 1)
+		    		$('#' + hex_md5(item.id)).addClass("needupdate")
+		    		update_apps[hex_md5(item.id)] = item;
+		    	}
+		    	apps[hex_md5(item.id)] = item;
+		    }
+		    function ShowNoDevice(){
+		    	HideLoading();
+		    	$(".main-container").html('<div class="warning"><p>请用USB线连接您的手机和电脑</p></div>')
+		    }
+		    function UpdateDeviceInfo(info) {
+		    	if (info.machine)
+		    		$("#machine").html(info.machine);
+		    	if (info.appcount)
+		    		$("#app-count").html(info.appcount)
+		    }
+		    function HideLoading() {
+		    	$(".loading").hide();
+		    	$("#app-container").show();
+		    }
+
+	    </script>
+		<script type="text/javascript" src="../js/doT.min.js"></script>
+		<script type="text/javascript" src="../js/md5.js"></script>
+		<script id="J_tmpl" type="text/template">
+				<a class="show-unstall" href="#miniwdj://myapps/remove|{{=it.id}}" hidefocus="true" data-name="{{=it.title}}">
+					<span class="unstall" data-id="{{=it.id}}" data-name="{{=it.title}}"></span>
+					<img src="{{=it.icon68}}" class="icon" width="68" />
+					<span class="name" title="{{=it.title}}">{{=it.title}}</span>
+				</a>
+    	</script>
+		<script id="J_tmp_update" type="text/template">
+				<a class="show-unstall" href="#miniwdj://myapps/remove|{{=it.id}}" hidefocus="true" data-name="{{=it.title}}">
+					<span class="unstall" data-id="{{=it.id}}" data-name="{{=it.title}}"></span>
+					<img src="{{=it.icon68}}" width="68" />
+					<span class="name" title="{{=it.title}}">{{=it.title}}</span>
+				</a>
+				<a href="{{=it.update_url}}" class="update" onClick="blur()" hideFocus="true">升级</a>
+    	</script>
+	</body>
+</html>

@@ -1,0 +1,663 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	font: 12px/18px 'Microsoft Yahei', sans-serif;
+}
+li {
+	list-style: none;
+}
+a {
+	color: #666;
+	text-decoration: none;
+}
+.clear-fix1 {
+	clear: both;
+}
+.clear-fix:after{
+	content:'';
+	display:block;
+	clear:both;
+	overflow:hidden;
+	height:0;
+}
+.container {
+	width: 300px;
+	min-height: 430px;
+	
+	background: #fafafa url(./images/background.png);
+	
+}
+
+
+.update-content {
+	display: none;
+}
+.task-content {
+	/*display: none;*/
+}
+/*标题部分----------------------------*/
+.header {
+	width: 300px;
+	height: 39px;
+	overflow: hidden;
+	position: relative;
+	border-bottom: 1px #ccc solid;
+	background-color: #eee;
+	z-index: 99;
+}
+.title {
+	padding-left: 10px;
+	font-size: 12px;
+	color: #666;
+	line-height: 39px;
+}
+.nav {
+	float: right;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.apps-nav {
+	background: url(./images/apps.png) 0 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 2px;
+	float: left;
+}
+.apps-nav:hover {
+	background: url(./images/apps.png) -29px 0;
+}
+.apps-nav:active {
+	background: url(./images/apps.png) -58px 0;
+}
+.apps-nav.active  {
+	background: url(./images/apps.png) -58px 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 2px;
+	float: left;
+	cursor: pointer;
+}
+
+.down-nav {
+	background: url(./images/download.png) 0 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 2px;
+	float: left;
+	cursor: pointer;
+}
+.down-nav:hover {
+	background: url(./images/download.png) -29px 0;
+}
+.down-nav:active {
+	background: url(./images/download.png) -58px 0;
+}
+.down-nav.active {
+	background: url(./images/download.png) -58px 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 2px;
+	float: left;
+	cursor: pointer;
+}
+.up-nav {
+	background: url(./images/update.png) 0 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 7px;
+	float: left;
+	cursor: pointer;
+	position: relative;
+}
+.up-nav:hover {
+	background: url(./images/update.png) -29px 0;
+}
+.up-nav:active {
+	background: url(./images/update.png) -58px 0;
+}
+.up-nav.active {
+	background: url(./images/update.png) -58px 0;
+	width: 29px;
+	height: 26px;
+	margin-top: 7px;
+	margin-right: 7px;
+	float: left;
+	cursor: pointer;
+}
+.nav a {
+	display: block;
+	width: 29px;
+	height: 26px;
+}
+/*.patch {
+	position: absolute;
+	top: -3px;
+	right: -3px;
+	color: #fff;
+	display: block;
+	padding: 0 2px;
+	background: red;
+	border-radius: 2px;
+	font-size: 10px;
+}*/
+/* all apps & update apps ----------------------------*/
+.slides-wrapper{
+	margin:0 15px;
+	padding:10px 0;
+	width:270px;
+	position:relative;
+	overflow:hidden;
+}
+ul.original{
+  display:none;
+}
+.update_container {
+	width: 300px;
+	height: 325px;
+	position: relative;
+	zoom:1;
+	overflow-y: hidden;
+	overflow-x: hidden; 
+	
+	border-top: none;
+}
+.update-all {
+	position: absolute;
+	top: 40px;
+	border-top: 1px #fff solid;
+	width: 300px;
+	background: #6db800;
+	height: 37px;
+	line-height: 37px;
+	text-align: center;
+	color: #fff;
+}
+.carousel {
+	width: 270px;
+	height: 340px;
+	margin: 10px 15px;
+}
+
+.slides .app {
+	width: 67px;
+	float: left;
+	position:relative;
+	text-align: center;
+}
+.slides .icon {
+	display: block;
+	margin: 0 auto;
+	width: 36px;
+	height: 36px;
+	border: none;
+	text-align: center;
+}
+.slides .name {
+	width: 50px;
+	display: block;
+	text-align: center;
+	height: 16px;
+	margin: 3px auto;
+	overflow: hidden;
+}
+
+.app .unstall {
+	position: absolute;
+	background: url(./images/unstall.png);/* IE7＋ */;
+	/*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./images/unstall.png');  IE6 */
+	width: 25px;
+	height: 25px;
+	right: 3px;
+	top: -5px;
+	display:none;
+	cursor: pointer;
+	zoom:1;
+	
+}
+a.show-unstall {
+	display: block;
+	cursor: default;
+	text-align: center;
+	padding: 5px 5px;
+	border:none;
+	position: relative;
+	zoom:1;
+	
+}
+a.show-unstall:hover {
+	
+	background-color: #e6e6e6;
+}
+a.show-unstall:hover .unstall{
+	display: inline-block;
+	z-index: 10;
+	zoom:1;
+	
+}
+a.show-unstall:hover .name {
+	cursor: pointer;
+	color: #6db800;
+}
+.update {
+	background: url(./images/button.png);
+	display: inline-block;
+	width: 56px;
+	height: 24px;
+	margin-bottom: 10px;
+	line-height: 24px;
+}
+.update:hover {
+	background: url(./images/button.png) -56px 0;
+}
+.update:active {
+	background: url(./images/button.png) -112px 0;
+}
+/*Pagination------------*/
+
+.pagination {
+	font-size: 0;
+	width: 240px;
+	margin: 0 30px;
+	height: 12px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.pagination li {
+	display: inline-block;
+	*display: inline;
+	*zoom:1;
+	margin:0 1px;
+	list-style:none;
+
+	height:12px;
+	overflow: hidden;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	padding-top:12px;
+	background:url(./images/page-current.png) no-repeat;
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
+.prev, .next {
+	position: absolute;
+	top: 190px;
+	left: 4px;
+	width: 21px;
+	height: 50px;
+	text-indent: -500px;
+	overflow: hidden;
+	display: block;
+	z-index: 11;
+}
+.prev {
+	background: url(./images/arrow-prev.png) no-repeat;
+	
+}
+.next {
+	left: 274px;
+	background: url(./images/arrow-next.png) no-repeat;
+}
+/*download---------------------------------*/
+.task-list {
+	/*height: 390px;*/
+	height:auto;
+}
+.task-list li {
+	width: 100%;
+	height: 44px;
+	list-style: none;
+	position: relative;
+	display: block;
+	float: left;  
+	clear: left;  
+}
+/*列表内元素从左到右*/
+.task-list .icon {
+	width: 36px;
+	height: 36px;
+	margin: 4px 0px 4px 10px;
+	position: absolute;
+}
+.task-list .name {
+	line-height: 18px;
+	width: 150px;
+	height: 18px;
+	overflow: hidden;
+	display: block;
+	position: absolute; 
+	left: 60px;
+	top: 4px;
+}
+.with-bar, .without-bar {
+	width: 215px;
+	height: 22px;
+	position: absolute;
+	left: 60px;
+	top: 22px;
+	overflow: hidden;
+	color: #999;
+}
+
+/*各种操作：暂停、继续、重试、覆盖、删除；悬停出现 tip */
+.action {
+	position: absolute;
+	right: 55px;
+	top: 5px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	text-decoration: none;
+}
+.pause {
+	background: url(./images/pause.png) no-repeat;
+}
+.continue {
+	background: url(./images/play.png) no-repeat;
+}
+.retry {
+	background: url(./images/reload.png) no-repeat;
+}
+.sure {
+	background: url(./images/checkmark.png) no-repeat;
+}
+.action span {
+	display: none;
+	width: 24px;
+	color: #6db800;
+	cursor: pointer;
+	line-height: 16px
+}
+.action:hover {
+	background: none;
+	zoom: 1;
+}
+.action:hover span {
+	display: block;
+}
+.delete {
+	position: absolute;
+	right: 25px;
+	top: 5px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(./images/del.png) no-repeat;
+	text-decoration: none;
+}
+.delete span {
+	display: none;
+	width: 24px;
+	color: #6db800;
+	cursor: pointer;
+	line-height: 16px
+}
+.delete:hover {
+	background: none;
+	zoom: 1;
+}
+.delete:hover span {
+	display: block;
+}
+/*对有进度条的 item 定义*/
+.progressBar {
+	height: 10px;
+	overflow: hidden;
+	background: url(./images/progressbar.png) no-repeat;
+	float: left;
+	margin-top: 3px;
+} 
+.with-bar p {
+	line-height: 18px;
+	float: left;
+	font-size: 10px;
+	margin-left: 5px;
+	color: #aaa;
+}
+/*对无进度条的 item 定义*/
+.without-bar p {
+	height: 22px;
+	line-height: 22px;
+	color: #999;
+}
+/*错误提示*/
+.error p {
+	color: red;
+}
+
+.even {
+	background-color: #f9f9f9;
+}
+/*下载／应用／升级为空时；loading----------------*/
+.loading, .empty {
+	position: absolute;
+	width: 300px;
+	height: 120px;
+	background: url(./images/logo_small.png) no-repeat 36px;
+	text-align: center;
+	top: 120px;
+	display: none;
+}
+.loading p , .empty p{
+	margin-top: 110px;
+	margin-bottom: 5px;
+	color: #aaa;
+}
+.loading a , .empty a {
+	color: #6db800;
+}
+/*应用卸载确认----------------*/
+.delete-mask {
+	position: absolute;
+	width: 300px;
+	height: 430px;
+	z-index: 10;
+	overflow: hidden;
+	background: rgba(255,255,255,0.7)!important;/* IE7＋ */;
+	filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#aaffffff', endColorstr='#aaffffff');
+	display: none;
+}
+.delate-asure {
+	background: #fff;
+	color: #333;
+	width: 302px;
+	margin-left: -1px;
+	padding: 15px 0;
+	position: relative;
+	top: 150px;
+	display: block;
+	border: 1px solid #ccc;
+}
+.delate-asure p {
+	margin: 0 20px 15px 20px;
+}
+.delete-yes {
+	background: url(./images/button-main.png);
+	display: block;
+	height: 28px;
+	width: 64px;
+	line-height: 28px;
+	color: #fff;
+	float: left;
+	margin-left: 80px;
+	text-align: center;
+}
+.delete-yes:hover {
+	background: url(./images/button-main.png) -64px;
+}
+.delete-yes:active {
+	background: url(./images/button-main.png) 64px;
+}
+.delete-no {
+	background: url(./images/button-normal.png);
+	display: block;
+	height: 28px;
+	width: 64px;
+	line-height: 28px;
+	color: #000;
+	float: left;
+	margin-left: 5px;
+	text-align: center;
+}
+.delete-no:hover {
+	background: url(./images/button-normal.png) -64px;
+}
+.delete-no:active {
+	background: url(./images/button-normal.png) 64px;
+}
+.delete-loading {
+	margin: 160px 120px;
+}
+/*usb connect*/
+.usb-connect {
+	width: 100%;
+	/*display: none;*/
+}
+.usb-connect img{
+	display: block;
+	margin: 40px 120px;
+}
+.usb-connect h1 {
+	font-size: 16px;
+	color: #333;
+	margin: 26px 60px 0 ;
+}
+.usb-connect p {
+	font-size: 12px;
+	color: #999;
+	margin: 18px 26px 0;
+}
+.usb-connect a {
+	display: block;
+	margin: 30px 0 0 50px;
+	color: #3c7800;
+}
+/*scrollbar----------------*/
+#scrollbar1 { width: 300px; position: relative;}
+#scrollbar1 .viewport { width: 300px; height: 390px; overflow: hidden; position: relative; }
+#scrollbar1 .overview { list-style: none;  }
+#scrollbar1 .scrollbar{  position: absolute; top:2px;right: 0;z-index: 100; background-position: 0 0; float: right; width: 15px; }
+#scrollbar1 .track {  height: 100%; width:13px; position: relative; padding: 0 1px; }
+#scrollbar1 .thumb { background: transparent url(./images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width: 25px; cursor: pointer; overflow: hidden; position: absolute; top: 5px; left: -5px; }
+#scrollbar1 .thumb .end { background: transparent url(./images/bg-scrollbar-thumb-y.png) no-repeat 50% 0%; overflow: hidden; height: 10px; width: 25px;z-index: 0; }
+#scrollbar1 .disable { display: none; }
+.noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+/* add for interaction by Guo Tao */
+.content-box{
+	position:static;
+}
+.content-box.hide{
+	position:absolute;
+	left:-99999em;
+}
+.frames-indicators-wrapper{
+	padding-top:1em;
+	text-align:center;
+}
+.frames-indicators-wrapper a.indicator{
+	display:inline-block;
+	float:none;
+	width:12px;
+	height:12px;
+	background :url(images/page-current.png) 0 0 no-repeat;
+	overflow:hidden;
+	margin: 0 0.2em;
+}
+.frames-indicators-wrapper a.indicator:hover,
+.frames-indicators-wrapper a.indicator.active{
+	background :url(images/page-current.png) 0 -12px no-repeat;
+}
+.frame-a, .frame-b{
+	position:absolute;
+	top:0;
+	width:50%;
+}
+.frame-a{
+	left:0;
+}
+.slide-pre,
+.slide-next{
+	position:absolute;
+	top:38%;
+	display:block;
+	width:21px;
+	padding-top:30px;
+	line-height:20px;
+	text-indent:-9999em;
+	zoom: 1;
+}
+.slide-pre{
+	/*left:0;*/
+	background:url(images/arrow-prev.png) no-repeat;
+}
+.slide-next{
+	right:0;
+	background:url(images/arrow-next.png) no-repeat;
+}
+.slide-arrow-wrapper{
+	position:relative;
+}
+/**** scroll bar*****/
+.scroll-wrapper {
+	padding:10px 0;
+	border-top: 1px #fff solid;
+}
+.scroll-inner{
+	height:370px;
+    overflow:hidden; /* for hide the content beyond it's scope */
+}
+.scroll-content{
+	padding:0;
+	position:relative;/* for scroll */
+	overflow:hidden; /* this is just for the scroll bar at it's right */
+}
+.scroller{
+	float:right;
+	width:13px;
+	position:relative;
+	background:url(images/bg_scroller.png) center top no-repeat;
+	z-index:9;
+}
+.scroll-bar{
+	position:absolute;
+	top:0;
+	left:0;
+	background:url(images/bg-scrollbar-thumb-y.png) center top no-repeat;
+	width:100%;
+	cursor: pointer;
+}
+.slides_container{
+	width:auto;
+}
+
+.apploading, .empty {
+	position: absolute;
+	width: 300px;
+	height: 120px;
+	background: url(./images/logo_small.png) no-repeat 36px;
+	text-align: center;
+	top: 120px;
+}
+.apploading p , .empty p{
+	margin-top: 110px;
+	margin-bottom: 5px;
+	color: #aaa;
+}
+.apploading a , .empty a {
+	color: #6db800;
+}

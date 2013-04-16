@@ -1,0 +1,208 @@
+<html>
+	<head>
+		<link href="task.css" rel="stylesheet">
+		<meta charset="utf-8">
+		<style>
+		.hide {
+			display: none;
+		}
+		.no-connected img{
+			position: absolute;
+			top: 90px;
+			left: 40px;
+		}
+		.no-connected h1 {
+			font-size: 16px;
+			font-family: Microsoft YaHei;
+			color: #333;
+			padding-top:10px;
+			padding-left: 15px;
+			padding-bottom: 5px;
+		}
+
+		.no-connected p {
+			font-size: 12px;
+			font-family: Microsoft YaHei;
+			color: #333;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="no-connected hide">
+			<h1> 请连接手机 </h1>
+			<p> 只需将USB线的两端插入手机和电脑 </p>
+			<p> 连接成功后即可下载应用，游戏到手机，安全免费哦～ </p>
+			<a href="miniwdj://task/close" class="close" hidefocus="true"></a>
+			<img src="./images/connect.png" />
+		</div>
+		<div class="container">
+			<div class="header">
+				<span class="title">下载任务</span>
+				<span class="statistics">共 <span id="total-count">0</span> 项</span>
+				<a href="miniwdj://task/close" class="close" hidefocus="true"></a>
+			</div>
+			<ul class="task-list">
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.8.0.js"></script>
+		<script type="text/javascript" src="../js/doT.min.js"></script>
+		<script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="./js/jquery.progressbar.min.js"></script>
+
+		
+    	<script id="J_tmpl" type="text/template">
+    			 
+					<img src="../img/default-icon.png" class="icon" width="36">
+					<span class="name" title="{{=it.name}}">{{=it.name}}</span>
+					<div class="with-bar">
+						<div class="progressBar" img="./images/progressbar.png"></div>
+						<p><span class="num-cur-size">{{= _getSizeStr(it.current) }}</span> / <span class="num-tot-size">{{= _getSizeStr(it.size) }}</span> </p>
+					</div>
+					<!-- 操作（暂停、继续、重试、覆盖） -->
+					<a href="miniwdj://task/stop|{{=it.id}}" class="action pause"><span>暂停</span></a>
+					<!-- 删除 -->
+					<a href="miniwdj://task/kill|{{=it.id}}" class="delete"><span >删除</span></a>
+				 
+    	</script>
+
+    	<script type="text/javascript">
+    	var item_count = 0;
+    	$(document).ready(function(){
+	    })
+	    function HideNoConnect() {
+	    	$(".container").removeClass("hide");
+	    	$(".no-connected").addClass("hide");
+	    }
+	    function ShowNoConnect() {
+	    	$(".container").addClass("hide");
+	    	$(".no-connected").removeClass("hide");
+	    }
+	    function _getSizeStr(i) {
+	    	if (!i) {
+	    		return "0 KB";
+	    	}
+	    	var ret = "";
+	    	if (i / 1000000.0 > 1) {
+	    		ret  = (i / 1000000.0).toFixed(1) + " MB"
+	    	} else {
+	    		ret  = (i / 1000.0).toFixed(1) + " KB"
+	    	}
+	    	return ret;
+	    }
+	    function updateStatusText(obj) {
+	    	var total_count = eval($("#total-count").html())
+	    	var done_count = eval($("#done-count").html())
+	    	
+	    	if (obj.total_delta) {
+	    		if (total_count + obj.total_delta < 0) {
+	    			$("#total-count").html("0")
+	    		}
+	    		else {
+	    			$("#total-count").html(total_count + obj.total_delta);
+	    		}
+	    	}
+	    	if (obj.done_delta) {
+	    		if (done_count + obj.done_delta < 0) {
+	    			$("#total-count").html("0")
+	    		} else {
+	    			$("#done-count").html(done_count + obj.done_delta)	
+	    		}
+	    	}
+	    }
+	    function addItem(item) {
+	    	item_count++;
+		    var tmpl = document.getElementById('J_tmpl').innerHTML;
+            var doTtmpl = doT.template(tmpl);
+            var item_html = doTtmpl(item);
+		    $('.task-list').prepend("<li id='" + hex_md5(item.id) +"'>" + item_html + "</li>");
+		    $('#' + hex_md5(item.id) + ' .progressBar').progressBar(item.progress, { barImage: 'images/percentImage.png', showText: false} );
+		    updateItem(item);
+		    updateStatusText({'total_delta': 1})
+		}
+		function removeItem(item) {
+			item_count--;
+			$('#' + hex_md5(item.id)).remove();
+			if (item_count == 0) {
+			}
+			if (item.status != "downloading" && item.status != "pause") {
+		    	updateStatusText({'total_delta': -1})
+			}
+		    else {
+		    	updateStatusText({'total_delta': -1, 'done_delta': -1})
+		    }
+		}
+		function updateItem(item) {
+			if (item.current) {
+		    	$('#' + hex_md5(item.id) + ' .num-cur-size').html(_getSizeStr(item.current));
+			}
+		    if (item.size) {
+		    	$('#' + hex_md5(item.id) + ' .num-tot-size').html(_getSizeStr(item.size));
+		    }
+		    if (item.name) {
+		    	$('#' + hex_md5(item.id) + ' .name').html(item.name);
+		    	$('#' + hex_md5(item.id) + ' .name').attr("title", item.name)
+		    }
+		   	if (item.icon68) {
+		    	$('#' + hex_md5(item.id) + ' .icon').attr("src", item.icon68);
+		   	}
+		    if (item.progress) {
+            	$('#' + hex_md5(item.id) + ' .progressBar').progressBar(item.progress, { barImage: 'images/percentImage.png', showText: false} );
+		    }
+
+		    if (item.status) {
+		    	var d = $('#' + hex_md5(item.id) + ' .with-bar');
+		    	if (item.status == 'pause') {
+		    		$('#' + hex_md5(item.id) + ' .action').removeClass('pause')
+		    		$('#' + hex_md5(item.id) + ' .action').addClass('continue');
+		    		$('#' + hex_md5(item.id) + ' .action').attr("href", "miniwdj://task/resume|" + item.id);
+		    		$('#' + hex_md5(item.id) + ' .resume').removeClass("hidden");
+		    		$('#' + hex_md5(item.id) + ' .action span').html('继续');
+		    	}
+		    	if (item.status == 'downloading') {
+		    		$('#' + hex_md5(item.id) + ' .action').removeClass('continue')
+		    		$('#' + hex_md5(item.id) + ' .action').addClass('pause');
+		    		$('#' + hex_md5(item.id) + ' .action').attr("href", "miniwdj://task/stop|" + item.id);
+		    		$('#' + hex_md5(item.id) + ' .action span').html('暂停');
+		    	}
+		    	if (item.status == 'installing') {
+		    		d.addClass("without-bar");
+		    		d.html("<p>安装中...</p>");
+		    	}
+		    	if (item.status == 'install_success') {
+		    		d.addClass("without-bar");
+		    		d.html("<p style='color:green'>安装成功</p>");
+		    		$('#' + hex_md5(item.id) + ' .action').removeClass('pause');
+		    		$('#' + hex_md5(item.id) + ' .action').addClass('retry');
+		    		$('#' + hex_md5(item.id) + ' .action span').html('重装');
+		    		$('#' + hex_md5(item.id) + ' .action').attr("href", "miniwdj://task/reinstall|" + item.id);
+		    		updateStatusText({'done_delta': 1})
+		    	}
+		    	if (item.status == 'install') {
+		    		d.addClass("without-bar");
+		    		$('#' + hex_md5(item.id) + ' .action').removeClass('pause');
+		    		$('#' + hex_md5(item.id) + ' .action').addClass('retry');
+		    		$('#' + hex_md5(item.id) + ' .action').attr("href", "miniwdj://task/reinstall|" + item.id);
+		    		$('#' + hex_md5(item.id) + ' .action span').html('安装');
+		    		d.html("<p style='color:green'>下载完成</p>");
+
+		    	}
+		    	if (item.status == 'install_failed') {
+		    		d.addClass("without-bar");
+		    		$('#' + hex_md5(item.id) + ' .action').removeClass('pause');
+		    		$('#' + hex_md5(item.id) + ' .action').addClass('retry');
+		    		$('#' + hex_md5(item.id) + ' .action span').html('重试');
+		    		$('#' + hex_md5(item.id) + ' .action').attr("href", "miniwdj://task/reinstall|" + item.id);
+		    		d.html("<p style='color:red'>" + item.msg + "</p>");
+		    		updateStatusText({'done-count': 1})
+		    	}
+		    	 
+		    }
+		}
+    	</script>
+
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="sidebar.css" rel="stylesheet" type="text/css">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <script type="text/javascript" src="./js/jquery-1.8.0.js"></script>
+</head>
+
+<body>
+    <ul class="sideBar">
+        <li class="current"><a hidefocus=true href="app:http://video.wandoujia.com/api/tiny" data-href="http://video.wandoujia.com/api/tiny">首页</a></li>
+        <li><a href="app:http://video.wandoujia.com/static/ttlist.html?list=tnew" hidefocus=true data-href="http://video.wandoujia.com/static/ttlist.html?list=tnew">电视剧</a></li>
+        <li><a href="app:http://video.wandoujia.com/static/tmlist.html?list=mnew" hidefocus=true data-href="http://video.wandoujia.com/static/tmlist.html?list=mnew">电影</a></li>
+    </ul>
+    <script>
+	document.body.onselectstart=function(){return false;}
+    document.body.ondragstart=function(){return false;}
+	document.body.oncontextmenu = function() {return false;}
+    $(document).ready(function (){
+        $(".sideBar a").click(function(){
+            $(".current").removeClass("current");
+            $(this).parent().addClass("current");
+        })
+		
+    })
+
+    </script>
+</body>
+</html>

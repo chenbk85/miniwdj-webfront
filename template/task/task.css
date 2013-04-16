@@ -1,0 +1,191 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-family: 'Microsoft Yahei';
+}
+.container {
+	width: 340px;
+	overflow: hidden;
+}
+html, body {
+	overflow: hidden;
+}
+/*头部标题部分*/
+.header {
+	padding: 10px 15px;
+	width: 330px;
+	height: 19px;
+	*width: 340px;
+	*height: 39px;
+	overflow: hidden;
+	position: relative;
+	border-bottom: 1px #ccc solid;
+}
+.title {
+	font-size: 14px;
+	color: #000;
+}
+.statistics {
+	color: #666;
+	padding-left: 5px;
+}
+.close {
+	background: url(./slices/close.png);
+	width: 32px;
+	height: 32px;
+	display: block;
+	position: absolute;
+	right: 5px;
+	top: 3px;
+}
+.progressBar {
+	margin-top:10px;
+}
+.close:hover {
+	background: url(./slices/close.png) -32px 0;
+}
+.close:active {
+	background: url(./slices/close.png) -64px 0;
+}
+/*任务列表开始*/
+.task-list {
+	width: 340px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 276px;
+	height:auto !important;  
+	height:276px;
+}
+.task-list li {
+	width: 340px;
+	height: 46px;
+	border-bottom: 1px #eee solid; 
+	list-style: none;
+	position: relative;
+	display: block;
+	float: left;  
+	clear: left;
+}
+/*列表内元素从左到右*/
+.icon {
+	width: 36px;
+	height: 36px;
+	margin: 5px 0px 5px 15px;
+	float: left;
+}
+.name {
+	line-height: 46px;
+	margin-left: 10px;
+	width: 60px;
+	height: 46px;
+	overflow: hidden;
+	display: block;
+	float: left;  
+}
+.with-bar, .without-bar {
+	width: 140px;
+	margin-left: 10px;
+	margin-right: 5px;
+	height: 46px;
+	float: left;
+}
+/*各种操作：暂停、继续、重试、覆盖、删除；悬停出现 tip */
+.action {
+	position: absolute;
+	right: 55px;
+	top: 15px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	text-decoration: none;
+}
+.pause {
+	background: url(./slices/pause.png) no-repeat;
+}
+.continue {
+	background: url(./slices/play.png) no-repeat;
+}
+.retry {
+	background: url(./slices/reload.png) no-repeat;
+}
+.sure {
+	background: url(./slices/checkmark.png) no-repeat;
+}
+.action span {
+	display: none;
+	width: 24px;
+	color: #38d;
+	cursor: pointer;
+}
+.action:hover {
+	background: none;
+	zoom: 1;
+}
+.action:hover span {
+	display: block;
+}
+.delete {
+	position: absolute;
+	right: 25px;
+	top: 15px;
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(./slices/del.png) no-repeat;
+	text-decoration: none;
+}
+.delete span {
+	display: none;
+	width: 24px;
+	color: #38d;
+	cursor: pointer;
+}
+.delete:hover {
+	background: none;
+	zoom: 1;
+}
+.delete:hover span {
+	display: block;
+}
+/*对有进度条的 item 定义*/
+.progress-bar {
+	margin-top: 6px;
+	height: 15px;
+	background-color: #ccc;
+} 
+.with-bar p {
+	line-height: 24px;
+	color: #666;
+}
+/*对无进度条的 item 定义*/
+.without-bar p {
+	height: 46px;
+	line-height: 46px;
+	color: #666;
+}
+/*错误提示*/
+.error p {
+	color: red;
+}
+.even {
+	background-color: #eee;
+}
+/*.toolbar {
+	float: right;
+	width: 380px;
+	height: 30px;
+	padding: 7px 15px;
+	background-color: #eee;
+	border-top: 1px #ccc solid;
+}
+.toolbar a {
+	color: #38d;
+	text-decoration: none;
+	float: right;
+	margin-left: 10px;
+}
+.toolbar a:hover {
+	text-decoration: underline;
+}
+*/

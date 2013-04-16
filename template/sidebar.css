@@ -1,0 +1,45 @@
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: "Microsoft YaHei"
+}
+a {
+	color: #ccc;
+	text-decoration: none;
+}
+.sideBar {
+	width: 90px;
+	height: 559px;
+	background: #292d35;
+	padding: 20px 0;
+	overflow: hidden;
+	float: left;
+}
+.sideBar li {
+	list-style: none;
+	color: #ccc;
+	font-size: 12px;
+	height: 40px;
+	display: block;
+	width: 90px;
+	float: left;  
+	clear: left
+}
+.sideBar a {
+	line-height: 40px;
+	display: block;
+	padding-left: 12px;;
+}
+.sideBar a:hover {
+	background: #000;
+}
+
+.sideBar .current a:hover {
+	background: #000 url(sidebar_current.png);
+	color: #fff;
+}
+.current a {
+	background: #000 url(sidebar_current.png);
+	color: #fff;
+}

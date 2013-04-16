@@ -1,0 +1,214 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	font: 12px/18px 'Microsoft Yahei', sans-serif;
+}
+
+.warning {
+	float: left;
+	width: 780px;
+	height: 560px;
+	position: relative;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	z-index: 10;
+	background: #fcfcfc url(./images/logo_main.png) center center no-repeat;
+}
+.warning p {
+	font-size: 14px;
+	color: #555;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: 52px;
+	display: block; 
+	position: relative;
+	width: 400px;
+	text-align: center;
+}
+
+li {
+	list-style: none;
+}
+a {
+	color: #333;
+	text-decoration: none;
+}
+.clear-fix {
+	clear: both;
+}
+html,body {
+	overflow: hidden;
+}
+.container {
+	width: 870px;
+	height: 560px;
+	overflow: hidden;
+}
+/*左侧导航*/
+.sideBar {
+	width: 90px;
+	height: 540px;
+	background: #292d35;
+	padding-top: 20px;
+	overflow: hidden;
+	float: left;
+}
+.sideBar li {
+	list-style: none;
+	color: #ccc;
+	font-size: 12px;
+	height: 40px;
+	display: block;
+	width: 90px;
+	float: left;  
+	clear: left;
+}
+.sideBar a {
+	color: #ccc;
+	line-height: 40px;
+	display: block;
+	padding-left: 12px;
+}
+.sideBar a:hover {
+	background: #000;
+}
+.sideBar .current a {
+	background: #000 url(./images/sidebar_current.png);
+	color: #fff;
+}
+.patch {
+	color: #fff;
+	background: #6db800;
+	margin-left: 5px;
+	padding: 0 2px;
+}
+/*应用列表区域*/
+.main-container {
+	float: left;
+	width: 779px;
+	height: 560px;
+	position: relative;
+	zoom:1;
+	overflow-y: auto;
+	overflow-x: hidden;  
+}
+.title {
+	font-size: 14px;
+	color: #555;
+	padding: 30px 15px 20px 35px;
+	float: left;
+	*display: inline;
+}
+
+.tip {
+	display: none
+}
+.update-all {
+	background: url(./images/update-all.png) 0 0 ;
+	font-size: 14px;
+	color: #fff;
+	height: 28px;
+	width: 92px;
+	line-height: 26px;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+	top:25px;
+	left: 625px;
+}
+.update-all:hover {
+	background: url(./images/update-all.png) -92px 0 ;
+}
+.update-all:active {
+	background: url(./images/update-all.png) -184px 0 ;
+}
+.carousel {
+	padding: 0 20px 20px;
+	width: 721px;
+	*width: 761px;
+	display: block;
+}
+.app {
+	width: 93px;
+/*	*width: 103px;*/
+	float: left;
+	position: relative;
+	padding: 12px 5px;
+	text-align: center;
+}
+.icon {
+	display: block;
+	margin: 0 auto;
+	width: 68px;
+	height: 68px;
+	background: url(./images/default-icon.png);
+	border: none;
+	text-align: center;
+}
+.name {
+	width: 90px;
+	display: block;
+	text-align: center;
+	height: 16px;
+	margin: 3px auto;
+	overflow: hidden;
+
+}
+.update {
+	cursor: pointer;
+	width: 41px;
+	height: 24px;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	background-color: #F2F2F4;
+	border: 1px solid #B3B3B3;
+	line-height: 24px;
+	padding-left: 15px;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fdfdfd',EndColorStr='#E8E8E8')
+}
+.update:hover {
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#ECECEC',EndColorStr='#E0E0E0')
+
+}
+.update:active { 
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#ECECEC',EndColorStr='#C0C0C0')
+}
+.no-update {
+	width: 60px;
+	height: 24px;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	cursor: default;
+}
+.app .unstall {
+	position: absolute;
+	background: url(./images/unstall.png);
+	width: 25px;
+	height: 25px;
+	right: 5px;
+	top: -8px;
+	display: none;
+	cursor: pointer;
+}
+.show-unstall {
+	display: block;
+	cursor: default;
+	text-align: center;
+}
+.show-unstall:hover {
+	position: relative;
+}
+.show-unstall:hover .unstall {
+	display: block;
+	z-index: 10;
+	padding: 0
+}
+
+
+
+
+

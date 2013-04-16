@@ -1,0 +1,46 @@
+html, body {
+	margin: 0;
+	padding : 0;
+}
+#frame {
+	z-index:-1;
+	overflow:hidden;
+	float:right;
+	width:777px;
+	height:559px;
+}
+
+.loading {
+	position: absolute;
+	left: 90px;
+	top: 0;
+	z-index: 100;
+	background: white; 
+}
+
+.hide {
+	display: none
+}
+
+.warning {
+	float: left;
+	width: 780px;
+	height: 560px;
+	position: relative;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	z-index: 10;
+	background: #fcfcfc url(./img/logo_main.png) center center no-repeat;
+}
+.warning p {
+	font-size: 14px;
+	color: #555;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: 52px;
+	display: block; 
+	position: relative;
+	width: 400px;
+	text-align: center;
+}

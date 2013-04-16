@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="sidebar.css" rel="stylesheet" type="text/css">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <script type="text/javascript" src="./js/jquery-1.8.0.js"></script>
+</head>
+
+<body>
+    <ul class="sideBar">
+        <li class="current"><a hidefocus=true href="app:http://mini.wandoujia.com" data-href="http://mini.wandoujia.com">首页</a></li>
+        <li><a href="app:http://mini.wandoujia.com/games/mini_index.html" hidefocus=true data-href="http://mini.wandoujia.com/games/mini_index.html">游戏专区</a></li>
+        <li><a href="app:http://mini.wandoujia.com/games/special/mini_big.html?pos=w/games/catlist" hidefocus=true data-href="http://mini.wandoujia.com/games/special/mini_big.html?pos=w/games/catlist">游戏数据包</a></li>
+        <li><a href="app:http://mini.wandoujia.com/category/app" hidefocus=true >全部应用</a></li>
+        <li><a href="app:http://mini.wandoujia.com/category/game" hidefocus=true >全部游戏</a></li>
+        <li><a href="app:http://mini.wandoujia.com/starter" hidefocus=true >装机必备</a></li>
+        <li><a href="app:http://mini.wandoujia.com/top" hidefocus=true >排行榜</a></li>
+        <li><a href="app:http://www.diaochapai.com/survey668510" hidefocus=true >和豌豆聊聊</a></li>
+    </ul>
+    <script>
+	document.body.onselectstart=function(){return false;}
+    document.body.ondragstart=function(){return false;}
+	document.body.oncontextmenu = function() {return false;}
+    $(document).ready(function (){
+        $(".sideBar a").click(function(){
+            $(".current").removeClass("current");
+            $(this).parent().addClass("current");
+        })
+    })
+
+    </script>
+</body>
+</html>

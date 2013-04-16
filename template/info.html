@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+BODY { SCROLLBAR-ARROW-COLOR:#434343;
+SCROLLBAR-FACE-COLOR:#EEE;
+SCROLLBAR-DARKSHADOW-COLOR:#FFFFFF;
+SCROLLBAR-HIGHLIGHT-COLOR:#EEE;
+SCROLLBAR-3DLIGHT-COLOR:#eaeaea;
+SCROLLBAR-SHADOW-COLOR:#eaeaea;
+SCROLLBAR-TRACK-COLOR:#FFFFFF;}
+</style>
+<style type="text/css">
+		html, body{
+			font-family: Microsoft YaHei, Arial
+			padding: 0px;
+			overflow: hidden;
+			width: 380px;
+			cursor: default;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+			float: right;
+			font-size: 12px;
+		}
+		img{
+			float: left;
+			position: absolute;
+			top: 10px;
+		}
+		.button {
+			cursor: pointer;
+			width: 70px;
+			height: 24px;
+			margin: 0 auto;
+			text-align: left;
+			display: block;
+			background-color: #F2F2F4;
+			border: 1px solid #B3B3B3;
+			line-height: 24px;
+			padding-left: 18px;
+			margin-left:5px;
+			filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fdfdfd',EndColorStr='#E8E8E8')
+		}
+		.primary {
+			border: 1px solid #4cAa00;
+		}
+		.success {
+			background-color: #4FAC03;
+			color: #fff;
+			filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#4FAC03',EndColorStr='#4FAC07');
+			border: 1px solid #4cAa00;
+		}
+
+		#controls{
+			width: 100%;
+			position: absolute;
+			top: 87px;
+		}
+		p {
+			font-size: 12px;
+		}
+		.title {
+			position: absolute;
+			top: 15px;
+			left: 68px;
+			font-size: 15px;
+			font-weight: bold;
+		}
+
+		.desc {
+			position: absolute;
+			top: 38px;
+			left: 68px;
+			font-size: 13px;
+			color: grey;
+		}
+		.info {
+			position: absolute;
+			top: 92px;
+			left: 18px;
+			font-size: 12px;
+			color: grey	;
+		}
+	</style>
+</head>
+<body>
+	<img src="./icon_default_app.png" width=48 height=48/>
+	<div id="title" class="title"> 豆瓣电台 </div>
+	<div id="desc" class="desc"> 版本: 1.7.2  大小: 10 MB</div>
+	<div id="info" class="info"> 请连接您的手机 </div>
+	<div id="controls">
+		<a href="app:no" class="button"   hideFocus="true">取 消</a>
+		<a href="app:yes" class="button success" id="installBtn"  hideFocus="true">安 装</a>
+	</div>
+	<script type="text/javascript">
+	document.body.onselectstart=function(){return false;}
+    document.body.ondragstart=function(){return false;}
+	document.body.oncontextmenu = function() {return false;}
+
+	function getTitle() {
+		var line = window.location.href;
+		
+		var start = line.indexOf('name=');
+		var i = start;
+		while (i++ < line.length) {
+			if (line.charAt(i) == '&') {
+				return line.substr(start + 5, i - start -5 );
+			}
+		}
+		return line.substr(start + 5)
+	}
+	function getVer() {
+		var line = window.location.href
+		var start = line.indexOf('ver=');
+		var i = start;
+		while (i++ < line.length) {
+			if (line.charAt(i) == '&') {
+				return line.substr(start + 4, i - start - 4 );
+			}
+		}
+		return line.substr(start + 4)
+	}
+	function getSize() {
+		var line = window.location.href
+		var start = line.indexOf('size=');
+		var i = start;
+		while (i++ < line.length) {
+			if (line.charAt(i) == '&') {
+				return line.substr(start + 5, i - start - 5);
+			}
+		}
+		return line.substr(start + 5)
+	}
+	function init() {
+		document.getElementById("title").innerHTML = getTitle();
+		document.getElementById("desc").innerHTML = '版本: ' + getVer() + ' 大小: ' + getSize();
+	}
+ 	
+ 	function UpdateInfo(s, type) {
+ 		type = type || 'normal';
+ 		if (type == 'normal') 
+ 			document.getElementById("info").innerHTML = s;
+ 		if (type == 'success') 
+ 			document.getElementById("info").innerHTML = '<font color="green">' + s + '</font>';
+ 	}
+
+ 	function UpdateInstallButtonText(s) {
+ 		document.getElementById("installBtn").innerHTML = s;
+ 	}
+	function SetText(p) {
+		var text = document.URL;
+		var obj = document.getElementById("text");
+		obj.innerHTML = p;
+	}
+	init();
+	</script>
+</body>
+</html>

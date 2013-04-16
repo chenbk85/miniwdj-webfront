@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		html, body{
+			font-family: Microsoft YaHei, Arial
+			padding: 13px;
+			overflow: hidden;
+			width: 370px;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+			float: right;
+			font-size: 12px;
+		}
+		.button {
+			cursor: pointer;
+			width: 70px;
+			height: 24px;
+			margin: 0 auto;
+			text-align: left;
+			display: block;
+			background-color: #F2F2F4;
+			border: 1px solid #B3B3B3;
+			line-height: 24px;
+			padding-left: 18px;
+			margin-left:5px;
+			filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fdfdfd',EndColorStr='#E8E8E8')
+		}
+		.success {
+			background-color: #4FAC03;
+			color: #fff;
+			filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#4FAC03',EndColorStr='#4FAC07')
+			border: 1px solid #4FAC07;
+		}
+
+		#controls{
+			width: 100%;
+			position: absolute;
+			top: 103px;
+		}
+		p {
+			font-size: 12px;
+		}
+	</style>
+
+</head>
+<body>
+	<h2></h2>
+	<p id="text"></p>
+	<div id="controls">
+		<a href="#miniwdj://messagebox/no" class="button"   hideFocus="true">取 消</a>
+		<a href="#miniwdj://messagebox/yes" class="button success"   hideFocus="true">确 认</a>
+	</div>
+	<script>
+	function SetText(p) {
+		var text = document.URL;
+		var obj = document.getElementById("text");
+		obj.innerHTML = p;
+	}
+
+	</script>
+</body>
+</html>

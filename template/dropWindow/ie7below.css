@@ -1,0 +1,10 @@
+.scroll-inner{
+    position:relative;/*fucking IE*/
+    z-index:2;
+}
+.scroll-content{
+	z-index:1;
+}
+.frame-a, .frame-b{
+	height:0;
+}
