@@ -189,7 +189,7 @@ $(document).ready(function() {
         collection: downloadItemCollection
     });
     downloadItemCollectionView.render();
-    window.location.href = "app:onload";
+    //window.location.href = "app:onload";
 });
 
 function AddDownloadItem(val) {

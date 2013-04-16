@@ -1,5 +1,5 @@
 $(function() {
-
+    
     var opts = {
       lines: 11, // The number of lines to draw
       length: 6, // The length of each line
@@ -111,18 +111,35 @@ $(function() {
 
 });
 
+function appRemove(el, ln){
+    //console.log(el);
+    var liIdx = el.closest('li.app').index();
+    var father = el.parents('.slides');
+    var slides = father.find('ul.silde-frame');
+    var idx = father.find('.indicator.active').index();
+    slides.eq(idx).find('li.app').eq(liIdx).remove();
+    if(slides.length > 1){
+        father.miniSlides({
+            count : ln,
+            finger : idx 
+        })
+    }else{
+        el.parents('li.app').remove();
+    }
+}
+
 function HideSpin(){
     $('.delete-loading').hide();
     $('.delete-mask').hide();
 }
 
 function RemoveAppByPn(pn) {
-    RemoveApp($('#app_' + hex_md5(pn)));
-    RemoveUpdateApp($('#update_app_' + hex_md5(pn)));
+    appRemove($('#app_' + hex_md5(pn) + ' .unstall'), 20);
+    appRemove($('#update_app_' + hex_md5(pn) + ' .unstall'),12);
 }
 
 function RemoveUpdateAppByPn(pn) {
-    RemoveUpdateApp($('#update_app_' + hex_md5(pn)));
+    appRemove($('#update_app_' + hex_md5(pn) + ' .unstall'), 12);
 }
 
 function JumpToFirstPage() {

@@ -42,8 +42,6 @@
 						});
 					}
 					
-					
-					
 					self.find('.frame-a , .frame-b, .frames-indicators-wrapper, .slide-next, .slide-pre').remove();
 					if(self.find('.slides-wrapper').parent().is('.slide-arrow-wrapper')){
 						self.find('.slides-wrapper').unwrap('.slide-arrow-wrapper');
@@ -69,9 +67,9 @@
 							arguments.callee();
 						}		
 					}
-					creatFrames();	
-					
-					defaults.finger = self.find('ul.silde-frame').length -1;		
+					creatFrames();
+					//defaults.finger = self.find('ul.silde-frame').length -1;
+
 					//make frames to slides
 					$(options.container).css({
 						'position' : 'relative',
@@ -87,6 +85,7 @@
 						//add preview and next button
 						self.find('.slides-wrapper').wrap('<div class="slide-arrow-wrapper"/>');
 						self.find('.slide-arrow-wrapper').append('<a class="slide-pre" href="#x">preview</a><a class="slide-next" href="#x">next</a>');
+						//console.log(options.finger);
 						if(options.finger > self.find('.silde-frame').length-1 ){
 							options.finger = self.find('.silde-frame').length-1;
 							self.find('.slide-next').hide();
@@ -102,7 +101,8 @@
 						self.find('.silde-frame').each(function(){
 							self.find('.frames-indicators-wrapper').append('<a class="indicator" href="#x"></a>');
 							
-						});	
+						});
+						//console.log(options.finger);
 						self.find('.indicator').eq(options.finger).addClass('active');
 						self.find('.frame-a').html(self.find('.silde-frame').eq(options.finger).html());
 					}else{
@@ -258,7 +258,7 @@
 		}
 	);
 })(jQuery);
-
+	
 $(document).ready(function(){
 	//tabs
 	$('.nav li').miniTabs();
@@ -268,39 +268,6 @@ $(document).ready(function(){
 		count : 12
 	});*/
 	//when remove an item form slide, it will recall the miniSlide function again
-	function appRemove(el){
-		console.log(el);
-		var liIdx = el.closest('li.app').index();
-		var father = el.parents('.slides');
-		var slides = father.find('ul.silde-frame');
-		var idx = father.find('.indicator.active').index();
-		slides.eq(idx).find('li.app').eq(liIdx).remove();
-		if(slides.length > 1){
-			var ln = slides.eq(0).find('li.app').length;
-			father.miniSlides({
-				count : ln,
-				finger : idx 
-			})
-		}else{
-			el.parents('li.app').remove();
-		}
-		/*$('.slides').delegate('.app .unstall', 'click', function(){
-			var liIdx = $(this).closest('li.app').index();
-			var father = $(this).parents('.slides');
-			var slides = father.find('ul.silde-frame');
-			var idx = father.find('.indicator.active').index();
-			slides.eq(idx).find('li.app').eq(liIdx).remove();
-			if(slides.length > 1){
-				var ln = slides.eq(0).find('li.app').length;
-				father.miniSlides({
-					count : ln,
-					finger : idx 
-				})
-			}else{
-				$(this).parents('li.app').remove();
-			}
-		});*/
-	}
 	
 	//scrollbar
 	$('#scrollbar1').miniScrollBar();
