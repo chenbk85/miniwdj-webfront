@@ -16,6 +16,7 @@ function _getSizeStr(i) {
     return ret;
 }
 function init() {
+    $('.empty-download').show();
     $('.down-tab').on('click',
     function() {
         $(this).addClass('down-tab-current');
@@ -97,6 +98,11 @@ $(document).ready(function() {
         onclickdelete: function() {
             window.location.href = "app:download_del:" + this.model.get("id");
             downloadItemCollection.remove(this.model.get("id"))
+            if (downloadItemCollection.length == 0) {
+                $('.empty-download').show();
+            } else {
+                $('.empty-download').hide();
+            }
             //window.external.call(JSON.stringify({event: "delete", id: this.model.get("id") , page:"task"}));
         },
         initialize: function() {
@@ -187,6 +193,7 @@ $(document).ready(function() {
 });
 
 function AddDownloadItem(val) {
+    $('.empty-download').hide();
     val.current_bytes = val.cur_bytes || 0;
     val.total_bytes = val.total_bytes || 0;
     if (val.total_bytes > 0) {

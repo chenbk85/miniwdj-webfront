@@ -8,17 +8,7 @@
 		<link type="text/css" rel="stylesheet" href="ie7below.css" media="all" />
 		<![endif]-->
 		<style>
-		html, body{
-			overflow: hidden;
-			SCROLLBAR-ARROW-COLOR:#eee;
-			SCROLLBAR-FACE-COLOR:#aaa;
-			SCROLLBAR-DARKSHADOW-COLOR:#eee;
-			SCROLLBAR-HIGHLIGHT-COLOR:#eee;
-			SCROLLBAR-3DLIGHT-COLOR:#eee;
-			SCROLLBAR-SHADOW-COLOR:#eee;
-			SCROLLBAR-TRACK-COLOR:#eee;
-			cursor: default;
-		} 
+		
 		</style>
 		<script type="text/javascript" src="js/spin.min.js"></script>
 		<script type="text/javascript" src="js/md5.js"></script>
@@ -52,23 +42,25 @@
 
 			</div>
 			
-			<div class="empty">
+			<div class="empty empty-apps">
 				<!-- 下载为空 -->
-				<p>没有正在进行的下载任务</p>
-				<a href="#">来看看有没有喜欢的应用、视频吧</a>
 				<!-- 应用为空 -->
 				<p>您还没有下载过应用到手机？</p>
 				<a href="#">去应用市场逛逛</a>
-				<!-- 升级为空 -->
-				<p>太赞了，所有应用都是最新的</p>
-				<a href="#">去发掘最新最有趣的应用</a>
+				 
 			</div>
 
 			<!-- <div class="loading">
 				<p>没有任务，去 <a href="#">挑选应用</a></p>
 			</div> -->
 			<div id="scrollbar1" class="task-content scroll-wrapper content-box">
-				
+				<div class="empty empty-download">
+					<!-- 下载为空 -->
+					<p>没有正在进行的下载任务</p>
+					<a href="#">来看看有没有喜欢的应用、视频吧</a>
+					 
+				</div>
+
 				<div class="scroll-inner">
 					<ul class="task-list overview scroll-content" id="items">
 						
@@ -78,6 +70,12 @@
 			
 			<!--已装应用-->
 			<div class="allapps-content slides downloaded content-box hide">
+				<div class="empty empty-update">
+					<!-- 升级为空 -->
+					<p>太赞了，所有应用都是最新的</p>
+					<a href="#">去发掘最新最有趣的应用</a>
+				</div>
+
 				<div class="usb-connect">
 					<img src="images/usb.png">
 					<h1>请使用 USB 线连接手机</h1>
