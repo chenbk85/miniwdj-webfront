@@ -118,6 +118,12 @@ function RemoveUpdateAppByPn(pn) {
 function JumpToFirstPage() {
     // TODO
     //$('.allapps-content .pagination li').first().click();
+    if(!$('.nav li').eq(0).hasClass('.active')){
+    	$('.nav li').eq(0).addClass('active');
+    }
+    $('.nav li').eq(0).siblings().removeClass('active');
+    $('.content-box').not('hide').hide().addClass('hide');
+    $('.content-box').eq(0).fadeIn(300).removeClass('hide');
 }
 // 添加app
 function AddApp(json) {
@@ -192,7 +198,11 @@ function RemoveApp(obj) {
 }
 
 function RemoveAllApps(){
-    // TODO
+    $('.slides').find('.frame-a , .frame-b, .frames-indicators-wrapper, .slide-next, .slide-pre, ul.silde-frame').remove();
+    $('.slides').find('.original').empty();
+	if($('.slides').find('.slides-wrapper').parent().is('.slide-arrow-wrapper')){
+		$('.slides').find('.slides-wrapper').unwrap('.slide-arrow-wrapper');
+	}
 }
 
 
