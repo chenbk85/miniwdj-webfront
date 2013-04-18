@@ -200,8 +200,8 @@
 						scroller = self.find('.scroller');
 						bar = self.find('.scroll-bar');
 						setScroll();
-
 						handleScroll();
+						handleMouseWheel();
 					}
 					function setScroll(){
 						scroller.css({
@@ -249,9 +249,55 @@
 					
 						$(document).bind('mouseup', function(){
 							winUp();
-						})
-							
-						
+						})			
+					}
+					
+					function handleMouseWheel(){
+						//mouse wheel scroll event
+						var flag = true;
+						$(document).bind('mousewheel', function(event, delta) {
+						    var top = parseInt(bar.css('top'),10);
+						    var height = bar.height();
+						    
+						    function mouseWheelAnimation(barTop, contentTop){
+						    	flag = false;
+						    	bar.animate({
+							    		'top': barTop
+							    	},
+							    	1,
+							    	function(){
+							    		flag = true;
+						    	});
+						    	self.find(options.scrollContent).animate({
+						    			'top': contentTop
+						    		},
+						    	1);
+						    }
+						    
+						    if(delta == -1 && (top + height) < wrapperHeight-20 && flag){
+						    	var x = '+=20px';
+						    	var y = '-='+ Math.ceil(20/ratio) +'px';
+						    	mouseWheelAnimation(x,y);
+						    	
+						    }
+						    if(delta == -1 && (top + height) > wrapperHeight-20 && (top + height) < wrapperHeight && flag){
+						    	var z = wrapperHeight - (top + height);
+						    	var x = '+=' + z + 'px';
+						    	var y = '-='+ Math.ceil(z/ratio) +'px';
+						    	mouseWheelAnimation(x,y);
+						    	
+						    }
+						    if(delta == 1 && top >=20 && flag){
+						    	var x= '-=20px';
+						    	var y = '+='+ Math.ceil(20/ratio) +'px'
+						    	mouseWheelAnimation(x,y);
+						    }
+						    if(delta == 1 && top < 20 && top > 0 && flag){
+						    	var x= '-=' + top + 'px';
+						    	var y = '+='+ Math.ceil(top/ratio) +'px'
+						    	mouseWheelAnimation(x,y);
+						    }
+						});
 					}
 				});
 			}
